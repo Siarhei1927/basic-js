@@ -13,10 +13,19 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
-function transform(/* arr */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+let transform = arr => arr.flatMap((value, i, array) => {
+  if (!(Array.isArray(arr))) throw new Error("'arr' parameter must be an instance of the Array!");
+ 
+    if (array[i - 1] === '--discard-next') return [];
+    if (array[i + 1] === '--discard-prev') return [];
+    if (array[i - 1] === '--double-next') return [value, value];
+    if (array[i + 1] === '--double-prev') return [value, value];
+    
+    if (value.toString().startsWith('--d')) return [];
+
+    return value;
+});
+
 
 module.exports = {
   transform
