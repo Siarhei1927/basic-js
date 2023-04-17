@@ -7,7 +7,7 @@ function getSeason(date = 'no-value') {
     return "Unable to determine the time of year!";
 
   if (date instanceof Date) {
-    if (Object.prototype.toString.call(date) !== '[object Date]') throw new Error('Invalid date!');
+    if (date.hasOwnProperty('toString')) throw new Error('Invalid date!');
     
   const month = date.getMonth();
 
